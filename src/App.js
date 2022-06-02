@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import {
+  Routes,
+  Route,
+  BrowserRouter,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
+import Main from "./pages/main/Main";
+import Homepage from "./pages/homepage/Homepage";
+import Register from "./pages/registerPage/Register";
+import TimeLine from "./pages/timeline/TimeLine";
+import PublicProfile from "./pages/publicProfile/PublicProfile"
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+
+        {/* public pages */}
+        <Route path="/" element={<Main />}>
+          <Route index element={<Homepage />}/>
+          <Route path="/register" element={<Register />}/>
+          <Route path="/login" element={<Homepage />}/>
+          <Route path="/timeline" element={<TimeLine />}/>
+          <Route path="/profile" element={<PublicProfile />}/>
+          {/* private pages */}
+          <Route path="/profile" element={<PrivateOutlet />}>
+            
+          </Route>
+        </Route>
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App;
+function PrivateOutlet() {
+  const auth = useSelector((state) => state.auth);
+  return auth.status ? <Outlet /> : <Navigate to="/login" />;
+}
+
+// function PrivateRoute({ children }) {
+//   const auth = useAuth();
+//   return auth ? children : <Navigate to="/login" />;
+// }
+
+function useAuth() {
+  const authMode = useSelector((state) => state.auth.authMode);
+  return true;
+}
