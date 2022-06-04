@@ -22,7 +22,7 @@ export default function App() {
           <Route path="/register" element={<Register />}/>
           <Route path="/login" element={<Homepage />}/>
           <Route path="/timeline" element={<TimeLine />}/>
-          <Route path="/profile" element={<PublicProfile />}/>
+          <Route path="/publicprofile" element={<PublicProfile />}/>
           {/* private pages */}
           <Route path="/profile" element={<PrivateOutlet />}>
             

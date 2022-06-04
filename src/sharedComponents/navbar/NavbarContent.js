@@ -19,9 +19,9 @@ import logo from '../../static/logo.png'
 import axios from "axios";
 import serverUrl from "../../config";
 
-const pages = ["Login"];
+const pages = ["Login", "Profile"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
+const pageUrls = {Login:"login", Profile:"publicProfile"}
 
 export default function NavbarContent() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -116,7 +116,7 @@ export default function NavbarContent() {
             <Button
               key={page}
               component={Link}
-              to={`/${page}`}
+              to={`/${pageUrls[page]}`}
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >

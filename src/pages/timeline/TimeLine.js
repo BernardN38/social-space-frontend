@@ -1,9 +1,10 @@
 import React,{useEffect, useState} from "react";
 import { Box } from "@mui/material";
 import Post from "../../sharedComponents/post/Post";
+import { v4 as uuid } from 'uuid';
 import axios from "axios";
 import ServerUrl from "../../config";
-export default function () {
+export default function TimeLine () {
   const posts = [
     {
       poster: { name: "bernard narvaez" },
@@ -42,6 +43,7 @@ export default function () {
     <Box>
       {posts.map((post) => (
         <Post
+        key={uuid()}
           poster={post.name}
           date={post.date}
           textContent={post.textContent}

@@ -1,0 +1,12 @@
+@media screen and (min-width: 500px) {
+    #public-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #public-profile-inner {
+        width: 55% ;
+    }
+
+  }

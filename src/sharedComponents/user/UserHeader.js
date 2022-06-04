@@ -29,7 +29,7 @@ export default function UserHeader({
             sx={{ height: 100, width: 100, margin: "4px" }}
             srcSet={imageSrc}
           />
-          <Typography sx={{}}>{name}</Typography>
+          <Typography >{name}</Typography>
           <Box sx={{display:"flex", width: "100%"}}>
             <Button
               sx={{ marginRight: "3px" }}

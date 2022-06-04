@@ -14,23 +14,32 @@ import {
 import SendIcon from "@mui/icons-material/Send";
 import serverUrl from "../../config";
 
-export default function SubmitPostForm({ profileName = "bernard narvaez", posts, setPosts, userId }) {
-    const [formData,setFormData] = useState({textContent:""});
+export default function SubmitPostForm({
+  profileName = "bernard narvaez",
+  posts,
+  setPosts,
+  userId,
+}) {
+  const [formData, setFormData] = useState({ textContent: ""  });
   function handleChange(e) {
-      const {name,value} = e.target;
-      setFormData({...formData, [name]: value});
-      console.log(formData)
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   }
-  const submitForm = ()=>{
-      const json = JSON.stringify(formData);
-      console.log(json)
-      axios.post(`${serverUrl}/api/users/${userId}/posts`, json, {withCredentials:true, headers: { 'Content-Type': 'application/json'}}).then((resp)=>{
-          setPosts([...posts, resp.data]);
-          console.log(resp.data)
-      }).catch((error)=>{
-        console.log(error.response)
+  const submitForm = () => {
+    const json = JSON.stringify(formData);
+    axios
+      .post(`${serverUrl}/api/users/${userId}/posts`, json, {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
       })
-  }
+      .then((resp) => {
+        setFormData({ textContent: "" });
+        setPosts([...posts, resp.data]);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
   return (
     <Card
       variant="outlined"
@@ -47,10 +56,10 @@ export default function SubmitPostForm({ profileName = "bernard narvaez", posts,
       <Box>
         <FormControl>
           <TextField
-          name="textContent"
+            name="textContent"
             id="outlined-name"
             label={`Leave a message`}
-            value={formData.message}
+            value={formData.textContent}
             onChange={handleChange}
           />
         </FormControl>
